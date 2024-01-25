@@ -2,6 +2,5 @@
 
 #Hint: remember the indentation.
 
-
-if 5 > 2:
-    print("YES")
+if 5>2:
+    print("Yes")
