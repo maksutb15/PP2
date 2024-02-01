@@ -1,4 +1,5 @@
-#Use the len function to print the length of the string.
-
-x = "Hello World"
-print(len(x))
+#Print the second item in the fruits list.
+fruits = ["apple", "banana", "cherry"]
+print(
+fruits[1]
+)

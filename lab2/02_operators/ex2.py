@@ -1,6 +1,6 @@
-#The statement below would print a Boolean value, which one?
+#Divide 10 by 2, and print the result.
 
 
-print(10 == 9)
-
-False
+print(10 
+/
+ 2)

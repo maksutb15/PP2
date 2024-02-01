@@ -1,4 +1,5 @@
-#Convert the value of txt to upper case.
+#Use the remove method to remove "banana" from the fruits list.
 
-txt = "Hello World"
-txt = txt.upper()
+
+fruits = ["apple", "banana", "cherry"]
+fruits.remove("banana")
