@@ -2,9 +2,7 @@
 Unfortunately, your store only sells items in ounces. 
 Create a function to convert grams to ounces. ounces = 28.3495231 * grams"""
 
-
-def grams_to_ounces(grams):
-    return round(grams * 28.3495231, 2)
-
-x = float(input("Enter the value:"))
-print(x , "grams are equal to", grams_to_ounces(x) , "ounces")
+def cod(x):
+    return (x*28.3495231)
+x=float(input())
+print(cod(x))
