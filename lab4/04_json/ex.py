@@ -6,7 +6,7 @@ data = json.loads(json_string)
 interfaces = data.get('imdata', [])
 print("Interface Status")
 print("=" * 80)
-print("{:<50} {:<20} {:<8} {:<6}".format("DN", "Description", "Speed", "MTU"))
+print("{:<50} {:<20} {:<8} {:<6}".format("DN", " 1Description", "Speed", "MTU"))
 print("-" * 50, "-" * 20, "-" * 8, "-" * 6)
 
 for i in interfaces:
