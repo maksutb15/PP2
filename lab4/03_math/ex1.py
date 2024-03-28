@@ -6,5 +6,5 @@ Output radian: 0.261904
 
 import math
 degree = int(input("Enter the value of degree:"))
-radian = degree * (math.pi / 180)
+radian = (degree * math.pi) / 180
 print(round(radian,6),"in radians")
