@@ -1,3 +1,9 @@
+'''
+1)Adding randomly appearing coins on the road
+2)Showing the number of collected coins in the top right corner
+3)Comment your code
+'''
+
 import pygame
 import random
 import time
@@ -16,7 +22,7 @@ WHITE = (255, 255, 255)
 
 SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 600
-SPEED = 5*3
+SPEED = 5
 SCORE = 0
 COINS = 0
 
@@ -31,7 +37,7 @@ DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Racer")
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):     
+    def __init__(self):
         super().__init__()
         self.image = pygame.image.load("Enemy.png")
         self.rect = self.image.get_rect()
@@ -39,20 +45,17 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         global SCORE
-        self.rect.move_ip(0, SPEED//3)
+        self.rect.move_ip(0, SPEED)
         if self.rect.bottom > SCREEN_HEIGHT:
             SCORE += 1
             self.rect.top = 0
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
 class Coins(pygame.sprite.Sprite):
-    def __init__(self, supercoin = False):
+    def __init__(self):
         super().__init__()
-        if supercoin:
-            self.image = pygame.image.load("supercoin.png")
-        else:    
-            self.image = pygame.image.load("coin.png")
-            self.image = pygame.transform.scale(self.image, (30, 30))
+        self.image = pygame.image.load("coin.png")
+        self.image = pygame.transform.scale(self.image,(30,30))
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
@@ -62,8 +65,8 @@ class Coins(pygame.sprite.Sprite):
             self.rect.top = 0
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
-def generate_coins(supercoin = False):
-    new_coin = Coins(supercoin)
+def generate_coins():
+    new_coin = Coins()
     coins.add(new_coin)
     all_sprites.add(new_coin)
 
@@ -96,13 +99,9 @@ all_sprites.add(E1)
 #Adding a new User events
 INC_SPEED = pygame.USEREVENT + 1
 pygame.time.set_timer(INC_SPEED, 1000)
-# Generate super coins every 6 seconds
-SUPERCOIN_EVENT = pygame.USEREVENT + 3
-pygame.time.set_timer(SUPERCOIN_EVENT, 6000)  
 # Generate coins every 3 seconds
 COIN_EVENT = pygame.USEREVENT + 2
 pygame.time.set_timer(COIN_EVENT, 3000)  
-
 
 # Load sounds and set up channels
 pygame.mixer.init()
@@ -110,19 +109,12 @@ crash_sound = pygame.mixer.Sound('crash.wav')
 background_sound = pygame.mixer.Sound('background.wav')
 background_sound.play(-1)  # Looping background sound
 
-current_coin = None
 while True:
-    was_supercoin = False
     for event in pygame.event.get():
         if event.type == INC_SPEED:
             SPEED += 0.2
-        if event.type == SUPERCOIN_EVENT:
-            was_supercoin = True        
-            generate_coins(supercoin = True)
-            current_coin = "super"
-        if event.type == COIN_EVENT and was_supercoin == False:
+        if event.type == COIN_EVENT:
             generate_coins()
-            current_coin = "regular"
         if event.type == QUIT:
             pygame.quit()
             
@@ -152,15 +144,11 @@ while True:
             entity.kill()
         time.sleep(2)
         pygame.quit()
-        
 
     # Check for collision with coins
     coin_collisions = pygame.sprite.spritecollide(P1, coins, True)
     if coin_collisions:
-        if current_coin == "super":
-            COINS += 2
-        else:
-            COINS += 1
-        SPEED+=1    
+        COINS += len(coin_collisions)
+
     pygame.display.update()
     FramePerSec.tick(FPS)
