@@ -12,10 +12,10 @@ WIDTH, HEIGHT = 1200, 1000
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 
-seconds = pygame.image.load("/Users/1/Desktop/PP2/Lab7/01_mickeymouse/leftarm.png")
-minutes = pygame.image.load("/Users/1/Desktop/PP2/Lab7/01_mickeymouse/rightarm.png")
+seconds = pygame.image.load("leftarm.png")
+minutes = pygame.image.load("rightarm.png")
 
-background = pygame.image.load("/Users/1/Desktop/PP2/Lab7/01_mickeymouse/mainclock.png")
+background = pygame.image.load("mainclock.png")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))  
 
 run = True
